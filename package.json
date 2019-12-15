@@ -1,0 +1,22 @@
+{
+  "name": "import-sort-style-acala",
+  "description": "Group and sort imports proper",
+  "version": "0.1.0",
+  "homepage": "https://github.com/drdla/import-sort-style-acala",
+  "repository": "drdla/import-sort-style-acala",
+  "author": "Dominik Rodler <dominik.rodler@gmail.com>",
+  "main": "dist/index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "",
+    "start": "",
+    "prepublishOnly": "yarn build"
+  },
+  "dependencies": {
+    "import-sort": "^6.0.0"
+  },
+  "devDependencies": {},
+  "keywords": [
+    "import-sort-style"
+  ]
+}
