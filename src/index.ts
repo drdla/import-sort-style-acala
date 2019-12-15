@@ -75,6 +75,18 @@ export default (styleApi: IStyleAPI, file?: string, options?: any): Array<IStyle
     {separator: true},
 
     /**
+     * Third-party modules.
+     *
+     * @example import … from 'foo'
+     */
+    {
+      match: and(isAbsoluteModule, not(isFirstPartyModule)),
+      sort: moduleName(naturally),
+      sortNamedMembers: alias(unicode),
+    },
+    {separator: true},
+
+    /**
      * Known first-party module modules.
      *
      * @example import … from '~/moduless/foo'
