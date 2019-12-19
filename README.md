@@ -2,6 +2,8 @@
 
 Custom sort style for [import-sort](https://github.com/renke/import-sort).
 
+This sort style offers a general first-party group plus up to four specific groups for first-party modules.
+
 Install import-sort in your project like this:
 
 ```bash
@@ -27,11 +29,14 @@ It will look something like this:
       "knownFirstParty": [
         "~/"
       ],
-      "knownComponent": [
-        "~/components"
+      "groupByPrefix1": [
+        "~/constants"
       ],
-      "knownModule": [
+      "groupByPrefix2": [
         "~/modules"
+      ],
+      "groupByPrefix3": [
+        "~/components"
       ]
     }
   },
@@ -42,11 +47,14 @@ It will look something like this:
       "knownFirstParty": [
         "~/"
       ],
-      "knownComponent": [
-        "~/components"
+      "groupByPrefix1": [
+        "~/constants"
       ],
-      "knownModule": [
+      "groupByPrefix2": [
         "~/modules"
+      ],
+      "groupByPrefix3": [
+        "~/components"
       ]
     }
   }

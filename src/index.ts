@@ -34,16 +34,17 @@ export default (styleApi: IStyleAPI, file?: string, options?: any): Array<IStyle
   } = styleApi;
 
   let knownFirstParty = options.knownFirstParty || [];
-  let knownComponent = options.knownComponent || [];
-  let knownModule = options.knownModule || [];
+  let groupByPrefix1 = options.groupByPrefix1 || [];
+  let groupByPrefix2 = options.groupByPrefix2 || [];
+  let groupByPrefix3 = options.groupByPrefix3 || [];
+  let groupByPrefix4 = options.groupByPrefix4 || [];
 
   const isFirstPartyModule = (imported: IImport) =>
     knownFirstParty.some(prefix => imported.moduleName.startsWith(prefix));
-
-  const isComponentsModule = (imported: IImport) =>
-    knownComponent.some(prefix => imported.moduleName.startsWith(prefix));
-
-  const isModulesModule = (imported: IImport) => knownModule.some(prefix => imported.moduleName.startsWith(prefix));
+  const isGroup1 = (imported: IImport) => groupByPrefix1.some(prefix => imported.moduleName.startsWith(prefix));
+  const isGroup2 = (imported: IImport) => groupByPrefix2.some(prefix => imported.moduleName.startsWith(prefix));
+  const isGroup3 = (imported: IImport) => groupByPrefix3.some(prefix => imported.moduleName.startsWith(prefix));
+  const isGroup4 = (imported: IImport) => groupByPrefix4.some(prefix => imported.moduleName.startsWith(prefix));
 
   return [
     /**
@@ -87,24 +88,48 @@ export default (styleApi: IStyleAPI, file?: string, options?: any): Array<IStyle
     {separator: true},
 
     /**
-     * Known first-party module modules.
+     * Known first-party module modules - group 1.
      *
      * @example import … from '~/moduless/foo'
      */
     {
-      match: and(isAbsoluteModule, isModulesModule),
+      match: and(isAbsoluteModule, isGroup1),
       sort: moduleName(naturally),
       sortNamedMembers: alias(unicode),
     },
     {separator: true},
 
     /**
-     * Known first-party component modules.
+     * Known first-party module modules - group 2.
      *
-     * @example import … from '~/components/foo'
+     * @example import … from '~/moduless/bar'
      */
     {
-      match: and(isAbsoluteModule, isComponentsModule),
+      match: and(isAbsoluteModule, isGroup2),
+      sort: moduleName(naturally),
+      sortNamedMembers: alias(unicode),
+    },
+    {separator: true},
+
+    /**
+     * Known first-party module modules - group 3.
+     *
+     * @example import … from '~/moduless/baz'
+     */
+    {
+      match: and(isAbsoluteModule, isGroup3),
+      sort: moduleName(naturally),
+      sortNamedMembers: alias(unicode),
+    },
+    {separator: true},
+
+    /**
+     * Known first-party module modules - group 4.
+     *
+     * @example import … from '~/moduless/woo'
+     */
+    {
+      match: and(isAbsoluteModule, isGroup4),
       sort: moduleName(naturally),
       sortNamedMembers: alias(unicode),
     },
@@ -119,7 +144,7 @@ export default (styleApi: IStyleAPI, file?: string, options?: any): Array<IStyle
      *  import … from '~/theme/foo'
      */
     {
-      match: and(isAbsoluteModule, isFirstPartyModule, not(isModulesModule), not(isComponentsModule)),
+      match: and(isAbsoluteModule, isFirstPartyModule, not(isGroup1), not(isGroup2), not(isGroup3), not(isGroup4)),
       sort: moduleName(naturally),
       sortNamedMembers: alias(unicode),
     },
